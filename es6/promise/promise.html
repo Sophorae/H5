@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise</title>
+</head>
+<body>
+<script>
+  /*  var promise=new Promise(function (resolve,reject) {
+        setTimeout(function () {
+            //resolve('success');
+            reject('error');
+        },3000);
+    });
+    promise.then(function (data) {
+        console.log(data);
+        return 'next';
+    },function (error) {
+        console.log(error);
+        return 'error';
+    }).then(function (data) {
+        console.log(data);
+    }).catch(function (error) {
+        console.log(data);
+    })*/
+
+  var promise1=new Promise(function (resolve,reject) {
+      setTimeout(function () {
+          resolve('success1');
+      },100);
+  });
+  var promise2=new Promise(function (resolve,reject) {
+      setTimeout(function () {
+          resolve('success2');
+      },1000);
+  });
+  var promise3=new Promise(function (resolve,reject) {
+      setTimeout(function () {
+          resolve('success3');
+      },3000);
+  });
+  Promise.race([promise1,promise2,promise3]).then(function (data1,data2,data3) {
+      console.log(data1,data2,data3)
+  }).catch(function (error) {
+      console.log(error)
+  })
+</script>
+</body>
+</html>

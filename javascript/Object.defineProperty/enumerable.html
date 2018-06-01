@@ -1,0 +1,17 @@
+<script>
+	var obj = {};
+	Object.defineProperty(obj, "a", { value : 1, enumerable:true });
+	Object.defineProperty(obj, "b", { value : 2, enumerable:false });
+	Object.defineProperty(obj, "c", { value : 3 });
+	obj.d = 4;
+
+	for (var i in obj) {
+		console.log(i);
+	}
+
+	Object.keys(obj);
+
+	console.log(obj.propertyIsEnumerable('a'));
+	console.log(obj.propertyIsEnumerable('b'));
+	console.log(obj.propertyIsEnumerable('c'));
+</script>

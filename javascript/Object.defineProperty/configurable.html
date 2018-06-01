@@ -1,0 +1,21 @@
+<script>
+	var obj = {};
+	Object.defineProperty(obj, "a", {
+	    get : function() {return 1;},
+	    configurable : false
+	});
+
+	// throws a TypeError
+	Object.defineProperty(obj, "a", {configurable : true});
+	// throws a TypeError
+	Object.defineProperty(obj, "a", {enumerable : true});
+	// throws a TypeError (set was undefined previously)
+	Object.defineProperty(obj, "a", {set : function(){}});
+	// throws a TypeError (even though the new get does exactly the same thing)
+	Object.defineProperty(obj, "a", {get : function(){return 1;}});// throws a TypeError
+	Object.defineProperty(obj, "a", {value : 12});
+
+	console.log(obj.a); // 1
+	delete obj.a; // Nothing happens
+	console.log(obj.a); // 1
+</script>

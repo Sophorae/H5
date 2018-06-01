@@ -1,0 +1,21 @@
+<script>
+	var obj = {};
+
+	Object.defineProperty(obj, 'a', {
+	    value: 37,
+	    writable: false
+	});
+
+	console.log(obj.a);
+	obj.a = 25;
+	console.log(obj.a);
+
+	// Object.defineProperty(obj, 'a', {
+	//     value: 37,
+	//     writable: true
+	// });
+
+	// console.log(obj.a);
+	// obj.a = 25;
+	// console.log(obj.a);
+</script>
