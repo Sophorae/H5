@@ -7,6 +7,7 @@
     <title>Ford</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/jquery-3.3.1.min.js"></script>    
 </head>
 <body>
     <div class="container">
@@ -16,19 +17,60 @@
             <img class="logo" src="./images/logo.png" alt="logo">
             <img class="ford-logo" src="./images/Ford-logo.png" alt="ford-logo">
         </div>
-        <div class="con">
+        <div class="content">
             <img src="./images/container.jpg" alt="">
-            <form class="event-registration">
+            <form class="event-registration" action="return false" method="" onsubmit="return false">
                 <img class="sign-up" src="./images/sign-up.png" alt="">
                 <p>
-                    <label for="username">您的名字：</label><input type="text" id="username">
-                    <input id="male" type="radio" name="sex"><label for="male">先生</label>
-                    <input id="female" type="radio" name="sex"><label for="female">女士</label>
+                    <label class="for-name" for="username">您的姓名：</label><input type="text" id="username" value="请输入姓名" maxlength="8" autocomplete="off">
+                    <input id="male" type="radio" name="sex" value="male" checked><label class="for-sex" for="male">先生</label>
+                    <input id="female" type="radio" name="sex" value="female"><label class="for-sex" for="female">女士</label>
                 </p>
+                <p>
+                    <label class="for-phone" for="phonenumber">联系方式：</label><input type="text" id="phonenumber" value="请输入联系方式" autocomplete="off" maxlength="11" oninput="this.value=this.value.replace(/[^\d]/g, '')">
+                </p>
+                <div>
+                    <label class="for-address" for="provice">所在地：</label>
+                    <div class="provice-select address-choice">
+                        <div id="provice">请选择省份</div>
+                        <ul class="provice-list" style="display: none">
+                            <li title="北京">北京</li>
+                            <li title="河北">河北</li>
+                        </ul>
+                    </div>
+                    <div class="city-select address-choice">
+                        <div id="city">请选择城市</div>
+                        <ul class="city-list" style="display: none">
+                            <li title="北京">石家庄石家庄石家庄石家庄石家庄石家庄石家庄</li>
+                            <li title="石家庄石家庄石家庄石家庄石家庄石家庄石家庄">石家庄石家庄石家庄石家庄石家庄石家庄石家庄</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <label for="distributor" class="for-distributor">意向经销商：</label>
+                    <div class="distributor-select">
+                        <div id="distributor">请选择意向经销商</div>
+                        <ul class="distributor-list" style="display: none">
+                            <li title="北京">北京</li>
+                            <li title="石家庄石家庄石家庄石家庄石家庄石家庄石家庄石家庄石家庄">石家庄石家庄石家庄石家庄石家庄石家庄石家庄石家庄石家庄</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <input id="agreement" type="checkbox"><label for="agreement">我同意</label>
+                    <span>《<a href="javascript:;">隐私权保护声明</a>》</span>
+                    <span class="agreement-alert" style="display: none; color: red">请阅读声明并同意</span>
+                </div>
+                <p>您的个人资料将会提交至长安福特授权经销商，与您进一步沟通相关事宜。</p>
+                <button id="submit">提交</button>
             </form>
         </div>
     </div>
-    <div class="footer"></div>
+    <div class="footer">
+        <div class="service-info">
+
+        </div>
+    </div>
 </body>
 </html>
 <script src="./js/index.js"></script>
