@@ -13,12 +13,13 @@
     <div class="container">
         <div class="banner">
             <h1 style="display: none">2018长安福特二手车巡展</h1>
-            <img class="banner-img" src="./images/Ford-banner.png" alt="2018长安福特二手车巡展">
+            <img class="banner-img" src="./images/banner.jpg" alt="2018长安福特二手车巡展">
             <img class="logo" src="./images/logo.png" alt="logo">
             <img class="ford-logo" src="./images/Ford-logo.png" alt="ford-logo">
         </div>
         <div class="content">
             <img src="./images/container.jpg" alt="">
+            <img class="activity" src="./images/activity.png" alt="">
             <form class="event-registration" action="return false" method="" onsubmit="return false">
                 <img class="sign-up" src="./images/sign-up.png" alt="">
                 <p>
@@ -27,7 +28,7 @@
                     <input id="female" type="radio" name="sex" value="female"><label class="for-sex" for="female">女士</label>
                 </p>
                 <p>
-                    <label class="for-phone" for="phonenumber">联系方式：</label><input type="text" id="phonenumber" value="请输入联系方式" autocomplete="off" maxlength="11" oninput="this.value=this.value.replace(/[^\d]/g, '')">
+                    <label class="for-phone" for="phonenumber">联系方式：</label><input type="text" id="phonenumber" value="请输入联系方式" autocomplete="off" maxlength="11" onkeyup="this.value=this.value.replace(/[^\d]/g, '')">
                 </p>
                 <div>
                     <label class="for-address" for="provice">所在地：</label>
@@ -59,7 +60,7 @@
                 <div>
                     <input id="agreement" type="checkbox"><label for="agreement">我同意</label>
                     <span>《<a href="javascript:;">隐私权保护声明</a>》</span>
-                    <span class="agreement-alert" style="display: none; color: red">请阅读声明并同意</span>
+                    <span class="agreement-alert" style="display: none; color: red; font-family: 'Microsoft YaHei'">请阅读并同意该声明</span>
                 </div>
                 <p>您的个人资料将会提交至长安福特授权经销商，与您进一步沟通相关事宜。</p>
                 <button id="submit">提交</button>
@@ -68,7 +69,26 @@
     </div>
     <div class="footer">
         <div class="service-info">
-
+            <img class="hua" src="./images/hua.png" alt="">
+            <h2>-“四心”服务&nbsp;-</h2>
+            <ul class="service-safe">
+                <li>
+                    <div>交易安心</div>
+                    <p>长安福特经销商严格按照厂家标准，为您提供专业置换流程及透明交易过程， 务必让您买得开心、卖得安心。</p>
+                </li>
+                <li>
+                    <div>手续放心</div>
+                    <p>长安福特经销商专业团队为您提供一站式服务，您只需准备好相关的资料， 买新车、卖旧车的手续一次就给您全办好。</p>
+                </li>
+                <li>
+                    <div>价格舒心</div>
+                    <p>长安福特经销商专业的团队都需通过厂家严格培训及考核方可上岗，拥有丰富的二手车评估经验，可以给您的爱车提供公开、透明、专业的定价</p>
+                </li>
+                <li>
+                    <div>礼品悦心</div>
+                    <p>凡到店置换新车的客户，均有机会获得4S店送出的精美礼品。</p>
+                </li>
+            </ul>
         </div>
     </div>
 </body>

@@ -64,7 +64,6 @@ $(function() {
         var provice = $('#provice').text();
         var city = $('#city').text();
         var distributor = $('#distributor').text();
-        console.log(flag, name, sex, phonenumber, provice, city, distributor)
         if(name == '' || name == '请输入姓名') {
             $('#username').val('请输入姓名').css('color', 'red')
             flag = false;
@@ -93,7 +92,6 @@ $(function() {
             flag = false;
             $('.agreement-alert').show()
         }
-        console.log(flag)
         if(flag) {
             $.ajax({
                 url: '',
@@ -108,6 +106,7 @@ $(function() {
                 },
                 success: function(res) {
                     if(res) {
+                        alert('提交成功！')
                         location.href="http://www.****.com"
                     }
                 }
