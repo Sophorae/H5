@@ -1,0 +1,127 @@
+<script>
+    $(function() {
+        const HANDLE = {
+            GETCODE: "getCode",
+            SUBMIT: 'submit'
+        }
+        
+        function trimPhoneNumber(value) { //格式手机号码344格式
+            value = value.replace(/[^\d]/g, "");
+            return value.length > 7 ? value.substr(0, 3) + " " + value.substr(3, 4) + " " + value.substr(7) : value.length > 3 ? value.substr(0, 3) + " " + value.substr(3) : value;
+        }
+
+        function messagesShow(message) { //错误提示
+            $(".message-text").text(message);
+            $(".message-box").stop(true).fadeIn(200).delay(1000).fadeOut(200);
+        }
+
+        let canGetCode = true; //获取验证码
+        function handleGetCode(res) {
+            if(res && canGetCode) {
+                let s = 60;
+                canGetCode = false;
+                $(".get-code").text(s + "s后重发").addClass("active");
+                var timer = setInterval(function() {
+                    $(".get-code").text(--s + "s后重发")
+                    s == 0 && $(".get-code").text("再次发送").removeClass("active") && (canGetCode = true) && clearInterval(timer);
+                }, 1000)
+            }
+        }
+        function handleSubmit(res) {
+            if (true) {
+                $(".popup").show();
+                $("html, body").css({
+                    "height": "100%",
+                    "overflow-y": "hidden"
+                })
+            }
+        }
+        function handleRes(handle) { //处理请求返回res
+            switch (handle) {
+                case HANDLE.GETCODE: return handleGetCode; break;
+                case HANDLE.SUBMIT: return handleSubmit; break;
+                default: "";
+            }
+        }
+
+        function handleAjax(url, data, handle) { //ajax请求s
+            $.ajax({
+                url: url,
+                type: "POST",
+                async: true,
+                data: data,
+                success: handleRes(handle)
+            })
+        }
+        
+        $(".return").on("click", function() { //左上角返回按钮
+            history.go(-1);
+        })
+
+        $("#phone").on("input", function() { //手机号输入
+            $(this).val(trimPhoneNumber($(this).val()));
+            $(this).val().length > 0 ? $(".reset-phone").show() : $(".reset-phone").hide();
+            $(this).val().length == 13 && $(".code-box").show() && $(".phone-box").addClass("active");
+        })
+        
+        $("#code").on("input", function() { //验证码输入
+            $(this).val().length > 0 ? $(".reset-code").show() : $(".reset-code").hide();
+        })
+        
+        $(".reset").on("click", function() { //重置按钮
+            var className = $(this).hide().attr("class");
+            switch (className) {
+                case "reset reset-phone": $("#phone").val(""); break;
+                case "reset reset-code": $("#code").val(""); break;
+                default: "";
+            }
+        })
+        
+        $(".get-code").on("click", function() { //获取验证码
+            var phone = $("#phone").val().replace(/\s/g, "");
+            ;/^1\d{10}$/.test(phone) ? handleAjax("./1.json", {phone: phone}, HANDLE.GETCODE) : canGetCode && messagesShow("请输入正确的手机号码");
+        })
+
+        $("#other").on("input", function() { //举报问题填写计数
+            $(".count").text($(this).val().length);
+        })
+
+        $("#report-submit").on("click", function() {
+            if($("input[name='reason']:checked").length == 0) {
+                messagesShow("请选择举报原因");
+                return false;
+            } else {
+                var reason = $("input[name='reason']:checked").val()
+            }
+            var phone = $("#phone").val().replace(/\s/g, "");
+            if(!/^1\d{10}$/.test(phone)) {
+
+            } else {
+                messagesShow("请输入正确的手机号码");
+                return false;
+            }
+            if($("#code").val() == "") {
+                messagesShow("请填写填写验证码")
+                return false;
+            } else {
+                var code = $("#code").val()
+            }
+            var other = $("#other").val();
+            handleSubmit(123)
+            /* handleAjax(url, {
+                reason,
+                phone,
+                code,
+                other
+            }, HANDLE.SUBMIT) */
+        })
+        
+        $(".popup-close").on("click", function() {
+            $(".popup").hide();
+            $("html, body").css({
+                "height": "auto",
+                "overflow-y": "auto"
+            })
+        })
+    })
+</script>
