@@ -6,11 +6,17 @@ function Report() {
 
     this.messagesShow = function(message) {
         this.messageText.text(message);
-        this.messageBox.stop(true).fadeIn(200).delay(1000).fadeOut(200);
+        if (this.canAnimate) {
+            this.canAnimate = false;
+            this.messageBox.fadeIn(200).fadeIn(200).delay(1000).fadeOut(200, $.proxy(function() {
+                this.canAnimate = true;
+            }, this));
+        }
+        return false;
     }
 
     this.handleGetCode = function(res) {
-        if(res && this.canGetCode) {
+        if(this.canGetCode) {
             let s = 10;
             this.canGetCode = false;
             this.getCode.text(s + "s后重发").addClass("active");
@@ -48,13 +54,13 @@ function Report() {
 
     this.init = function() {
         this.HANDLE = {
-            GETCODE: "getCode",
+            GETCODE: "getcode",
             SUBMIT: "submit"
         }
         this.ERROR = {
             REASONERROR: "请选择举报原因",
             PHONEERROR: "请输入正确的手机号码",
-            CODEERROR: "请填写填写验证码"
+            CODEERROR: "请填写验证码"
         }
         this.checkPhone = new RegExp("^1\\d{10}$");
         this.timer = null;
@@ -62,8 +68,9 @@ function Report() {
         this.phone = "";
         this.canGetCode = true;
         this.historyBack = $(".return");
-        this.messageText = $(".message-text");
         this.messageBox = $(".message-box");
+        this.canAnimate = true;
+        this.messageText = $(".message-text");
         this.phoneBox = $(".phone-box");
         this.phoneInput = $("#phone");
         this.codeBox = $(".code-box");
@@ -75,7 +82,7 @@ function Report() {
         this.otherInput = $("#other");
         this.count = $(".count");
         this.submit = $("#report-submit");
-        this.checkedReason = $("input[name='reason']");
+        this.checkReason = $("input[name='reason']");
         this.reason = "";
         this.code = "";
         this.other = "";
@@ -112,7 +119,7 @@ function Report() {
 
         this.getCode.on("click", $.proxy(function() {
             this.phone = this.phoneInput.val().replace(/\s/g, "");
-            this.checkPhone.test(this.phone) ? this.handleAjax(url, {phone: this.phone}, this.HANDLE.GETCODE) : this.canGetCode && this.messagesShow(this.ERROR.PHONEERROR);
+            this.checkPhone.test(this.phone) ? /* this.handleAjax(url, {phone: this.phone}, this.HANDLE.GETCODE) */ this.handleRes(this.HANDLE.GETCODE)() : this.canGetCode && this.messagesShow(this.ERROR.PHONEERROR);
         }, this))
 
         this.otherInput.on("input", $.proxy(function() {
@@ -120,30 +127,27 @@ function Report() {
         }, this))
 
         this.submit.on("click", $.proxy(function() {
-            if (!this.checkedReason.is(":checked")) {
-                this.messagesShow(this.ERROR.REASONERROR);
-                return false;
+            if (this.checkReason.is(":checked")) {
+                this.reason = this.checkReason.filter(":checked").eq(0).val();
             } else {
-                this.reason = this.checkedReason.filter(":checked").eq(0).val();
+                return this.messagesShow(this.ERROR.REASONERROR);
             }
             this.phone = this.phoneInput.val().replace(/\s/g, "");
             if (!this.checkPhone.test(this.phone)) {
-                this.messagesShow(this.ERROR.PHONEERROR);
-                return false;
+                return this.messagesShow(this.ERROR.PHONEERROR);
             }
-            if (this.codeInput.val() == "") {
-                this.messagesShow(this.ERROR.CODEERROR);
-                return false;
-            } else {
-                this.code = this.codeInput.val();
+            this.code = this.codeInput.val();
+            if (this.code == "") {
+                return this.messagesShow(this.ERROR.CODEERROR)
             }
             this.other = this.otherInput.val();
-            this.handleAjax(url, {
+            /* this.handleAjax(url, {
                 reason: this.reason,
                 phone: this.phone,
                 code: this.code,
                 other: this.other
-            }, this.HANDLE.SUBMIT)
+            }, this.HANDLE.SUBMIT) */
+            this.handleRes(this.HANDLE.SUBMIT)();
         }, this))
 
         this.popupClose.on("click", $.proxy(function() {
