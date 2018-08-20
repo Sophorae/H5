@@ -8,9 +8,9 @@ function Report() {
         this.messageText.text(message);
         if (this.canAnimate) {
             this.canAnimate = false;
-            this.messageBox.fadeIn(200).fadeIn(200).delay(1000).fadeOut(200, $.proxy(function() {
+            this.messageBox.stop(true).fadeIn(200).delay(1000).fadeOut(200, $.proxy(function() {
                 this.canAnimate = true;
-            }, this));
+            }, this))
         }
         return false;
     }
