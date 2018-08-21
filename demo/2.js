@@ -5,8 +5,8 @@ function Report() {
     }
 
     this.messagesShow = function(message) {
-        this.messageText.text(message);
         if (this.canAnimate) {
+            this.messageText.text(message);
             this.canAnimate = false;
             this.messageBox.stop(true).fadeIn(200).delay(1000).fadeOut(200, $.proxy(function() {
                 this.canAnimate = true;
@@ -17,7 +17,7 @@ function Report() {
 
     this.handleGetCode = function(res) {
         if(this.canGetCode) {
-            let s = 10;
+            let s = 60;
             this.canGetCode = false;
             this.getCode.text(s + "s后重发").addClass("active");
             this.timer = setInterval(function() {
@@ -156,6 +156,7 @@ function Report() {
         }, this))
     }
 }
+
 $(function() {
     new Report().init().logic();
 })

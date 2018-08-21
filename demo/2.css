@@ -8,7 +8,9 @@ ul, li {
 a {
     text-decoration: none;
 }
-
+html, body {
+    font-family: "Microsoft YaHei";
+}
 html.active, body.active {
     height: 100%;
     overflow-y: hidden;
@@ -150,7 +152,6 @@ html.active, body.active {
     height: 0.5rem;
     font-size: 0.14rem;
     font-family: "Microsoft YaHei";
-    line-height: 0.5rem;
     border: none;
     outline: none;
 }
@@ -179,7 +180,6 @@ html.active, body.active {
     height: 0.5rem;
     font-size: 0.14rem;
     font-family: "Microsoft YaHei";
-    line-height: 0.5rem;
     border: none;
     outline: none;
 }
@@ -318,17 +318,17 @@ html.active, body.active {
     width: 100%;
     height: 100%;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(2, 3, 23, 0.30);
 }
 .popup .popup-window {
     position: absolute;
     top: 1.75rem;
     left: 50%;
-    margin-left: -1.355rem;
-    width: 2.71rem;
-    height: 2.25rem;
+    margin-left: -1.475rem;
+    width: 2.95rem;
+    height: 2.28rem;
     background: #ffffff;
-    border-radius: 0.06rem;
+    border-radius: 0.08rem;
 }
 .popup .popup-window .popup-close {
     position: absolute;
@@ -341,15 +341,15 @@ html.active, body.active {
 }
 .popup .popup-window .popup-img {
     position: absolute;
-    top: 0.26rem;
+    top: 0.2rem;
     left: 50%;
-    margin-left: -0.4rem;
-    width: 0.8rem;
-    height: 0.8rem;
+    margin-left: -0.47rem;
+    width: 0.94rem;
+    height: 0.94rem;
 }
 .popup .popup-window .popup-text {
     position: absolute;
-    top: 1.02rem;
+    top: 1.12rem;
     width: 100%;
     text-align: center;
     font-size: 0.17rem;
@@ -358,10 +358,10 @@ html.active, body.active {
 }
 .popup .popup-window .browse-other {
     position: absolute;
-    top: 1.53rem;
+    top: 1.56rem;
     left: 50%;
-    margin-left: -0.785rem;
-    width: 1.57rem;
+    margin-left: -0.91rem;
+    width: 1.82rem;
     height: 0.42rem;
     text-align: center;
     font-size: 0.17rem;
@@ -376,24 +376,21 @@ html.active, body.active {
 .message-box {
     display: none;
     position: fixed;
-    top: 50%;
-    margin: -0.25rem auto 0;
+    top: 2.27rem;
     width: 100%;
-    height: 0.5rem;
     text-align: center;
     z-index: 1;
 }
 .message-box .message-text {
     box-sizing: content-box;
-    position: absolute;
-    left: 50%;
-    padding: 0 0.2rem;
-    height: 0.5rem;
+    margin-left: 50%;
+    padding: 0.12rem 0.18rem;
+    max-width: 2.76rem;
     font-size: 0.14rem;
     color: #fff;
-    line-height: 0.5rem;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 0.015rem;
+    line-height: 0.24rem;
+    background: rgba(2, 3, 23, 0.75);
+    border-radius: 0.08rem;
     transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
